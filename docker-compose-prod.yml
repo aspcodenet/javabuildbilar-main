@@ -3,7 +3,6 @@ services:
     nginx:
         image: 096925879815.dkr.ecr.eu-north-1.amazonaws.com/nginx1
         restart: always
-        build:
         context: ./nginx
         ports:
             - 80:80
