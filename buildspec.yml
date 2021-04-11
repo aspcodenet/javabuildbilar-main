@@ -1,17 +1,20 @@
 version: 0.2
 
 phases:
+install:
+    runtime-versions:
+      docker: 19  
   pre_build:
     commands:
-      - echo Entered prebuild phase
+     - echo Logging in to Amazon ECR...
+     - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 096925879815.dkr.ecr.eu-north-1.amazonaws.com
   build:
     commands:
       - echo Build started on 
       - mvn  -DskipTests clean package  
+      - docker build -t 096925879815.dkr.ecr.eu-north-1.amazonaws.com/app1:latest .
+      - docker tag app1:latest 096925879815.dkr.ecr.eu-north-1.amazonaws.com/app1:latest
   post_build:
     commands:
-      - echo Build completed
-artifacts:
-  files:
-    - target/bilar-0.0.1-SNAPSHOT.jar
-  discard-paths: yes
+      - echo Pushing the Docker image...
+      - docker push 096925879815.dkr.ecr.eu-north-1.amazonaws.com/app1:latest
