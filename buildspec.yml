@@ -10,7 +10,6 @@ phases:
       - echo Build started on 
       - mvn  -DskipTests clean package  
       - docker build -t 096925879815.dkr.ecr.eu-north-1.amazonaws.com/app1:latest .
-      - docker tag app1:latest 096925879815.dkr.ecr.eu-north-1.amazonaws.com/app1:latest
   post_build:
     commands:
       - echo Pushing the Docker image...
