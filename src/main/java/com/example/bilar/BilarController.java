@@ -12,6 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BilarController {
+
+
+    @GetMapping(value="/")
+    @CrossOrigin()
+    public String empty() {
+        return "version";
+    }
+ 
+
     @GetMapping(value="/car")
     @CrossOrigin()
     public List<Car> getall() {
